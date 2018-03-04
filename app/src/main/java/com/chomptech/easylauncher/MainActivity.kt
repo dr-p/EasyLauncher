@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_apps_drawer.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -26,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onChromeButtonClick(v: View) {
-        val launchIntent = packageManager.getLaunchIntentForPackage("com.android.chrome")
+        //val launchIntent = packageManager.getLaunchIntentForPackage("com.android.chrome")
+        val launchIntent = Intent(this, AppsDrawer::class.java)
         startActivity(launchIntent)
     }
 
