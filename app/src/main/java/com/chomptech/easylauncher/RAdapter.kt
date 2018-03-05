@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.chomptech.easylauncher.AppInfo
 import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.Toast
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
+import com.chomptech.easylauncher.MainActivity
 import com.chomptech.easylauncher.R
 
 class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
@@ -16,17 +18,17 @@ class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
 
     inner class ViewHolder//This is the subclass ViewHolder which simply
     //'holds the views' for us to show on each row
-    (itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    (itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
         var textView: TextView
         var img: ImageView
 
 
         init {
-
             //Finds the views from our row.xml
             textView = itemView.findViewById(R.id.textIcon)
             img = itemView.findViewById(R.id.imgIcon) as ImageView
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
         override fun onClick(v: View) {
@@ -36,10 +38,18 @@ class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
             val launchIntent = context.getPackageManager().getLaunchIntentForPackage(appsList[pos].packageName!!.toString())
             context.startActivity(launchIntent)
             Toast.makeText(v.getContext(), appsList[pos].label!!.toString(), Toast.LENGTH_LONG).show()
+        }
 
+        override fun onLongClick(view: View): Boolean {
+            val pos = adapterPosition
+            val context = view.getContext()
+            val launchIntent = Intent(context.applicationContext, MainActivity::class.java)
+
+            launchIntent.putExtra("appName", appsList[pos].packageName!!.toString())
+            context.startActivity(launchIntent)
+            return true
         }
     }
-
 
     init {
 

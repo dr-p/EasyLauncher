@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_apps_drawer.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,11 +23,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val chromeIcon = findViewById<View>(R.id.chromeButton) as ImageView
-        chromeIcon.setImageDrawable(getActivityIcon(this, "com.android.chrome", "com.google.android.apps.chrome.Main"))
+
+        val intent = intent
+
+        Toast.makeText(this, intent.getStringExtra("appName"), Toast.LENGTH_LONG).show()
+        //val chromeIcon = findViewById<View>(R.id.chromeButton) as ImageView
+        //chromeIcon.setImageDrawable(getActivityIcon(this, "com.android.chrome", "com.google.android.apps.chrome.Main"))
     }
 
-    fun onChromeButtonClick(v: View) {
+    fun openAppDrawer(v: View) {
         //val launchIntent = packageManager.getLaunchIntentForPackage("com.android.chrome")
         val launchIntent = Intent(this, AppsDrawer::class.java)
         startActivity(launchIntent)
@@ -39,5 +44,8 @@ class MainActivity : AppCompatActivity() {
         val resolveInfo = pm.resolveActivity(intent, 0)
 
         return resolveInfo.loadIcon(pm)
+    }
+
+    override fun onBackPressed() {
     }
 }

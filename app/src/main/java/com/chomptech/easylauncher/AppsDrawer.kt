@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import RAdapter
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.GridLayoutManager
+
+
 
 
 
@@ -17,6 +20,7 @@ class AppsDrawer : AppCompatActivity() {
         val recyclerView = findViewById(R.id.appsList) as RecyclerView
         val radapter = RAdapter(this)
         recyclerView.adapter = radapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 6)
     }
 }
