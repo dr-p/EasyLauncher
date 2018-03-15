@@ -24,7 +24,7 @@ import android.content.pm.PackageInfo
 
 class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>(){
 
-    private val appsList: List<AppInfo>
+    val appsList: MutableList<AppInfo>
 
     inner class ViewHolder//This is the subclass ViewHolder which simply
     //'holds the views' for us to show on each row
@@ -86,7 +86,11 @@ class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>(){
                 appsList.add(app)
             }
         }
-
+        Collections.sort(appsList, object : Comparator<AppInfo> {
+            override fun compare(p0: AppInfo?, p1: AppInfo?): Int {
+                return p0!!.label.toString().compareTo(p1!!.label.toString())
+            }
+        })
     }
 
     override fun onBindViewHolder(viewHolder: RAdapter.ViewHolder, i: Int) {
