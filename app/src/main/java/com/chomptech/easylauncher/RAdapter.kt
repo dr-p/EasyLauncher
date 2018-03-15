@@ -12,9 +12,19 @@ import android.view.View
 import android.widget.ImageView
 import com.chomptech.easylauncher.MainActivity
 import com.chomptech.easylauncher.R
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.content.pm.PackageInfo
 
-class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
-    private val appsList: MutableList<AppInfo>
+
+
+
+class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>(){
+
+    private val appsList: List<AppInfo>
 
     inner class ViewHolder//This is the subclass ViewHolder which simply
     //'holds the views' for us to show on each row
@@ -63,12 +73,18 @@ class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
         i.addCategory(Intent.CATEGORY_LAUNCHER)
 
         val allApps = pm.queryIntentActivities(i, 0)
-        for (ri in allApps) {
-            val app = AppInfo()
-            app.label = ri.loadLabel(pm)
-            app.packageName = ri.activityInfo.packageName
-            app.icon = ri.activityInfo.loadIcon(pm)
-            appsList.add(app)
+        val allAppsAlpha = pm.getInstalledApplications(PackageManager.GET_META_DATA)
+        for (ri in allAppsAlpha) {
+            if(pm.getLaunchIntentForPackage(ri.packageName) != null){
+                //If you're here, then this is a launch-able app
+                val app = AppInfo()
+                app.label = ri.loadLabel(pm)
+                app.packageName = ri.packageName
+                //app.packageName = allApps[temp].activityInfo.packageName
+                //app.icon = allApps[temp].activityInfo.loadIcon(pm)
+                app.icon = ri.loadIcon(pm)
+                appsList.add(app)
+            }
         }
 
     }
@@ -106,4 +122,6 @@ class RAdapter(c: Context) : RecyclerView.Adapter<RAdapter.ViewHolder>() {
 
         return ViewHolder(view)
     }
+
+
 }
