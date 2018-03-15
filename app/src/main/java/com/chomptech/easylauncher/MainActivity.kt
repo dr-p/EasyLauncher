@@ -14,7 +14,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_apps_drawer.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+// part two of tutorial
+//https://www.androidauthority.com/custom-launcher-part-two-838188/
 //https://www.androidauthority.com/make-a-custom-android-launcher-837342-837342/
 //https://www.androidauthority.com/how-to-use-recycler-views-836053/
 class MainActivity : AppCompatActivity() {
@@ -25,8 +26,9 @@ class MainActivity : AppCompatActivity() {
 
 
         val intent = intent
-
-        Toast.makeText(this, intent.getStringExtra("appName"), Toast.LENGTH_LONG).show()
+        if (intent.hasExtra("appName")) {
+            Toast.makeText(this, intent.getStringExtra("appName"), Toast.LENGTH_LONG).show()
+        }
         //val chromeIcon = findViewById<View>(R.id.chromeButton) as ImageView
         //chromeIcon.setImageDrawable(getActivityIcon(this, "com.android.chrome", "com.google.android.apps.chrome.Main"))
     }

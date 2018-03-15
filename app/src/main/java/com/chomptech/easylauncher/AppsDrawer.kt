@@ -6,9 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import RAdapter
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.GridLayoutManager
-
-
-
+import android.view.KeyEvent
 
 
 class AppsDrawer : AppCompatActivity() {
@@ -22,5 +20,9 @@ class AppsDrawer : AppCompatActivity() {
         recyclerView.adapter = radapter
         //recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = GridLayoutManager(this, 6)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return super.onKeyDown(keyCode, event)
     }
 }
