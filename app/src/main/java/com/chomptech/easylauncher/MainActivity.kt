@@ -13,12 +13,27 @@ import android.widget.ImageView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_apps_drawer.*
 import kotlinx.android.synthetic.main.activity_main.*
+import android.view.MotionEvent
+import android.support.v4.view.MotionEventCompat
+import android.util.Log
+import android.view.GestureDetector
+import com.chomptech.easylauncher.MainActivity
+import android.support.v4.view.GestureDetectorCompat
+import android.text.method.Touch.onTouchEvent
+
+
+
+
+
+
+
 
 // part two of tutorial
 //https://www.androidauthority.com/custom-launcher-part-two-838188/
 //https://www.androidauthority.com/make-a-custom-android-launcher-837342-837342/
 //https://www.androidauthority.com/how-to-use-recycler-views-836053/
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,4 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
     }
+
+
+
 }
